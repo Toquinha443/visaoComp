@@ -1,0 +1,57 @@
+# Caminhos
+data:
+  raw_dir: "data/raw/grouper"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  version: "v1"   # v1 ou v2
+
+# Dataset (escolha uma forma de rotulagem)
+dataset:
+  structure: "folders"   # "folders" ou "csv"
+  csv_file: "labels.csv" # usado se structure == "csv"
+  classes: ["none", "weak", "medium", "strong"]
+
+# Pré-processamento
+preprocess:
+  resize: [512, 512]       # [largura, altura]
+  to_grayscale: false
+  clahe:
+    enabled: true
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+  denoise:
+    enabled: true
+    method: "bilateral"     # "bilateral" | "median" | "gaussian"
+    bilateral:
+      d: 7
+      sigmaColor: 50
+      sigmaSpace: 50
+    median:
+      ksize: 5
+    gaussian:
+      ksize: 5
+      sigmaX: 0
+  normalize: true
+
+# Aumento de dados (aplicado somente em treino)
+augment:
+  horizontal_flip: true
+  rotate_limit: 5
+  brightness_contrast: [0.1, 0.1]
+  blur_prob: 0.1
+  noise_prob: 0.05
+
+# Treino
+train:
+  batch_size: 32
+  num_workers: 2
+  epochs: 30
+  lr: 0.0008
+  weight_decay: 0.0005
+  model_name: "mobilenet_v3_small"
+  pretrained: true
+  early_stopping_patience: 7
+  lr_scheduler: "cosine"  # "none" | "cosine" | "step"
+  val_split: 0.2
+  seed: 42
+  tensorboard: true

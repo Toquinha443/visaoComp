@@ -1,0 +1,23 @@
+pirarucu_grouper_pipeline/
+├── data/
+│   ├── raw/
+│   │   └── grouper/              # coloque aqui o dataset original (ver opções A/B abaixo)
+│   ├── interim/                  # amostras e prévias do pré-processamento
+│   └── processed/
+│       ├── v1/                   # base processada (1ª versão aprovada)
+│       └── v2/                   # base processada (2ª versão, se houver)
+├── models/                       # pesos salvos (.pt)
+├── notebooks/                    # (opcional) experimentos no Jupyter/Colab
+├── runs/                         # logs (ex.: TensorBoard)
+├── scripts/
+│   ├── preview_and_preprocess.py # testar/ajustar filtros em poucas imagens e salvar prévias
+│   └── build_processed_dataset.py# gerar a base processada v1/v2 para treino
+├── train/
+│   └── train_mobilenetv3_classifier.py  # treino do classificador (PyTorch)
+├── utils/
+│   ├── augmentations.py          # aumentos (Albumentations)
+│   ├── datasets.py               # dataset loader (CSV ou pastas por classe)
+│   ├── transforms.py             # pré-processamento (CLAHE, denoise, resize, normalize)
+│   └── common.py                 # utilidades (seed, mkdir)
+├── config.yaml                   # parâmetros de caminho, pré-processamento e treino
+└── requirements.txt
